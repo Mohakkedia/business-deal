@@ -527,8 +527,6 @@ class GameEngine {
   }
 
   getStateForPlayer(playerId) {
-    const youState = this.playersMap.get(playerId);
-    
     const opponents = [];
     this.playerOrder.forEach(id => {
       if (id !== playerId) {
