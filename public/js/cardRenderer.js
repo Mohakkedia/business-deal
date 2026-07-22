@@ -194,7 +194,7 @@ window.CardRenderer = {
       return el;
     }
 
-    const dealLogoHtml = `<div class="card-deal-logo-circle"><span class="deal-circle-text">DEAL</span></div>`;
+    const dealLogoHtml = `<div class="card-deal-logo-circle"><span class="deal-circle-text">CHALOO</span></div>`;
     const titleHtml = `<div class="card-title">${card.name}</div>`;
 
     el.innerHTML = `

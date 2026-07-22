@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Deal</title>
+    <title>CHALOO</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +27,7 @@
     <!-- Title Screen -->
     <div id="title-screen" class="screen">
         <div class="title-container">
-            <h1 class="game-title">BUSINESS DEAL</h1>
+            <h1 class="game-title">CHALOO</h1>
             <p class="game-subtitle">The Ultimate Property Trading Card Game</p>
             
             <div class="input-group">
@@ -51,11 +51,11 @@
 
     <!-- Lobby Screen -->
     <div id="lobby-screen" class="screen hidden">
-        <div class="glass-panel centered-panel">
+        <div class="centered-panel glass-panel">
             <h2>Game Lobby</h2>
             <div class="room-info">
                 <p>Room Code</p>
-                <div class="code-display">
+                <div class="code-box">
                     <span id="room-code-display">----</span>
                     <button id="btn-copy-link" class="icon-btn" title="Copy Link">📋</button>
                 </div>
@@ -83,12 +83,12 @@
     <!-- Game Screen -->
     <div id="game-screen" class="screen hidden">
         <!-- Top: Opponents Area -->
-        <div id="opponents-area" class="opponents-top-bar">
+        <div id="opponents-area">
             <!-- Opponent panels generated dynamically -->
         </div>
 
-        <!-- Center: Game Table (Turn Info, Decks) -->
-        <div id="right-decks-area" class="table-center-zone">
+        <!-- Floating Right Area: Turn Info & Card Decks -->
+        <div id="right-decks-area" class="right-decks-corner">
             <div class="turn-info">
                 <div id="turn-indicator" class="glass-pill">
                     <span class="current-player-name">Waiting...</span>
@@ -111,12 +111,12 @@
         <!-- Floating In-Game Chat Box (Top Left Corner) -->
         <div id="game-chat-box" class="glass-panel chat-corner collapsed">
             <div class="chat-header" id="chat-header">
-                <span class="chat-title">💬 Chat <span id="chat-unread-badge" class="badge-unread hidden">0</span></span>
+                <span class="chat-title">💬 Game Chat <span id="chat-unread-badge" class="badge-unread hidden">0</span></span>
                 <button type="button" id="btn-toggle-chat" class="btn-chat-toggle" title="Open Chat">💬</button>
             </div>
             <div id="chat-body" class="chat-body">
                 <div id="chat-messages" class="chat-messages-list">
-                    <div class="chat-msg system">Welcome! Chat with other players here.</div>
+                    <div class="chat-msg system">Welcome to CHALOO! Chat with other players here.</div>
                 </div>
                 <form id="chat-form" class="chat-input-row">
                     <input type="text" id="chat-input" placeholder="Type a message..." maxlength="120" autocomplete="off" />
@@ -163,7 +163,7 @@
     <!-- Rules Screen -->
     <div id="rules-screen" class="screen hidden">
         <div class="glass-panel large-panel scrollable">
-            <h2>How to Play Business Deal</h2>
+            <h2>How to Play CHALOO</h2>
             <div class="rules-content">
                 <h3>Objective</h3>
                 <p>Be the first player to collect 3 complete property sets of different colors.</p>
