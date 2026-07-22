@@ -196,6 +196,40 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
+.card-value {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    left: auto;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #000000;
+    font-family: var(--font-heading);
+    font-size: 0.65rem;
+    font-weight: 900;
+    border: 1.5px solid #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+    font-family: var(--font-heading);
+    font-size: 0.52rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding: 4px 26px 4px 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
 .card-value-circle {
     position: absolute;
     top: 4px;

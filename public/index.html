@@ -83,12 +83,12 @@
     <!-- Game Screen -->
     <div id="game-screen" class="screen hidden">
         <!-- Top: Opponents Area -->
-        <div id="opponents-area">
+        <div id="opponents-area" class="opponents-top-bar">
             <!-- Opponent panels generated dynamically -->
         </div>
 
-        <!-- Floating Right Area: Turn Info & Card Decks -->
-        <div id="right-decks-area" class="right-decks-corner">
+        <!-- Center: Game Table (Turn Info, Decks) -->
+        <div id="right-decks-area" class="table-center-zone">
             <div class="turn-info">
                 <div id="turn-indicator" class="glass-pill">
                     <span class="current-player-name">Waiting...</span>
@@ -111,7 +111,7 @@
         <!-- Floating In-Game Chat Box (Top Left Corner) -->
         <div id="game-chat-box" class="glass-panel chat-corner collapsed">
             <div class="chat-header" id="chat-header">
-                <span class="chat-title">💬 Game Chat <span id="chat-unread-badge" class="badge-unread hidden">0</span></span>
+                <span class="chat-title">💬 Chat <span id="chat-unread-badge" class="badge-unread hidden">0</span></span>
                 <button type="button" id="btn-toggle-chat" class="btn-chat-toggle" title="Open Chat">💬</button>
             </div>
             <div id="chat-body" class="chat-body">

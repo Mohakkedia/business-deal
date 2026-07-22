@@ -679,36 +679,25 @@ input[type="text"]:focus {
     border-radius: 8px;
 }
 
-/* Floating Right Area: Turn Info & Card Decks */
-.right-decks-corner {
-    position: absolute;
-    right: 2.2rem;
-    top: 46%;
-    transform: translateY(-50%);
+/* Center Table Area: Turn Info & Card Decks */
+.table-center-zone {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.9rem;
+    justify-content: center;
+    gap: 0.8rem;
+    width: 100%;
+    margin: 0.2rem auto;
     z-index: 25;
-    background: rgba(8, 10, 24, 0.35);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 215, 0, 0.25);
-    padding: 0.9rem 1.1rem;
-    border-radius: var(--radius-md);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
 }
 
 .turn-info {
-    position: relative;
-    top: 0;
-    left: 0;
-    transform: none;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 0.35rem;
-    width: 100%;
+    justify-content: center;
+    gap: 1rem;
+    width: auto;
     z-index: 30;
 }
 
@@ -1466,16 +1455,19 @@ input[type="text"]:focus {
         margin-bottom: 4px !important;
     }
 
-    /* Floating Chat Box on Mobile (Collapsed by default) */
+    /* Floating Chat Box on Mobile (Bottom-Right FAB) */
     #game-chat-box {
         position: fixed !important;
-        top: 10px !important;
-        left: 10px !important;
+        bottom: 80px !important;
+        right: 15px !important;
+        top: auto !important;
+        left: auto !important;
         width: 44px !important;
         height: 44px !important;
         overflow: hidden !important;
         border-radius: 50% !important;
         z-index: 1000 !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important;
         transition: all 0.3s ease !important;
     }
 
@@ -1485,9 +1477,11 @@ input[type="text"]:focus {
     }
 
     #game-chat-box:not(.collapsed) {
-        width: calc(100vw - 20px) !important;
+        bottom: 80px !important;
+        right: 15px !important;
+        width: calc(100vw - 30px) !important;
         max-width: 320px !important;
-        height: 240px !important;
+        height: 250px !important;
         border-radius: 12px !important;
     }
 
@@ -1504,8 +1498,8 @@ input[type="text"]:focus {
 
     /* Hand Zone for Mobile */
     .hand-zone {
-        padding: 0.4rem !important;
-        min-height: 120px !important;
+        padding: 0.3rem !important;
+        min-height: 118px !important;
         height: auto !important;
     }
 
@@ -1513,11 +1507,11 @@ input[type="text"]:focus {
         overflow-x: auto !important;
         overflow-y: hidden !important;
         justify-content: flex-start !important;
-        padding-bottom: 6px !important;
+        padding-bottom: 4px !important;
     }
 
     #player-hand .card {
-        margin-left: -22px !important;
+        margin-left: -20px !important;
         flex: 0 0 auto !important;
     }
 
@@ -1530,7 +1524,7 @@ input[type="text"]:focus {
         overflow-x: auto !important;
         overflow-y: hidden !important;
         justify-content: flex-start !important;
-        padding-bottom: 6px !important;
+        padding-bottom: 4px !important;
     }
 
     .property-column {
@@ -1541,12 +1535,23 @@ input[type="text"]:focus {
 
     .bank-and-controls {
         width: 100% !important;
-        height: auto !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 4px 10px !important;
+        background: rgba(10, 12, 28, 0.7) !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+    }
+
+    .bank-total {
+        font-size: 0.9rem !important;
     }
 
     #btn-end-turn {
-        width: 100% !important;
-        padding: 0.7rem !important;
-        font-size: 0.95rem !important;
+        width: auto !important;
+        padding: 0.5rem 1.2rem !important;
+        font-size: 0.85rem !important;
     }
 }
