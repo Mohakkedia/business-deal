@@ -25,7 +25,7 @@ window.UI = {
     const codeDisplay = document.getElementById('room-code-display');
     if (codeDisplay) codeDisplay.textContent = roomCode;
     const shareLink = document.getElementById('shareable-link');
-    if (shareLink) shareLink.textContent = `${window.location.origin}/room/${roomCode}`;
+    if (shareLink) shareLink.textContent = `${window.location.origin}/?room=${roomCode}`;
   },
 
   onRoomUpdated(room) {
@@ -44,7 +44,7 @@ window.UI = {
       const codeDisplay = document.getElementById('room-code-display');
       if (codeDisplay) codeDisplay.textContent = code;
       const shareLink = document.getElementById('shareable-link');
-      if (shareLink) shareLink.textContent = `${window.location.origin}/room/${code}`;
+      if (shareLink) shareLink.textContent = `${window.location.origin}/?room=${code}`;
     }
 
     const list = document.getElementById('player-list');

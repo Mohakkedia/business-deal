@@ -3,11 +3,22 @@ document.addEventListener('DOMContentLoaded', () => {
   Network.init();
   
   // Check URL for room code (joining via shared link)
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramCode = urlParams.get('room');
   const pathMatch = window.location.pathname.match(/\/room\/([A-Z0-9]{4})/i);
-  if (pathMatch) {
-    // Auto-fill room code
+  const autoCode = (paramCode || (pathMatch ? pathMatch[1] : '')).toUpperCase();
+
+  if (autoCode && autoCode.length === 4) {
     const codeInput = document.getElementById('join-code-input');
-    if (codeInput) codeInput.value = pathMatch[1].toUpperCase();
+    if (codeInput) codeInput.value = autoCode;
+
+    setTimeout(() => {
+      const name = getPlayerName();
+      if (name) {
+        localStorage.setItem('playerName', name);
+        Network.joinRoom(autoCode, name);
+      }
+    }, 600);
   }
   
   // Load saved player name from localStorage
