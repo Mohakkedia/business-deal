@@ -679,25 +679,36 @@ input[type="text"]:focus {
     border-radius: 8px;
 }
 
-/* Center Table Area: Turn Info & Card Decks */
-.table-center-zone {
+/* Floating Right Area: Turn Info & Card Decks */
+.right-decks-corner {
+    position: absolute;
+    right: 2.2rem;
+    top: 46%;
+    transform: translateY(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 0.8rem;
-    width: 100%;
-    margin: 0.2rem auto;
+    gap: 0.9rem;
     z-index: 25;
+    background: rgba(8, 10, 24, 0.35);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    padding: 0.9rem 1.1rem;
+    border-radius: var(--radius-md);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
 }
 
 .turn-info {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    width: auto;
+    gap: 0.35rem;
+    width: 100%;
     z-index: 30;
 }
 
