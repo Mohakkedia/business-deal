@@ -3,10 +3,15 @@ const { getBotAction } = require('./botBrain');
 
 function initializeSocketHandlers(io, roomManager) {
   const broadcastGameState = (room) => {
-    if (!room.game) return;
+    if (!room || !room.game) return;
     room.players.forEach(p => {
-      if (!p.isBot) {
-        io.to(p.id).emit('game-state', room.game.getStateForPlayer(p.id));
+      if (p.id && !p.isBot) {
+        try {
+          const state = room.game.getStateForPlayer(p.id);
+          io.to(p.id).emit('game-state', state);
+        } catch (err) {
+          console.error(`Error broadcasting state to ${p.id}:`, err.message);
+        }
       }
     });
     

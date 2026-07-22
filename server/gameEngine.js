@@ -544,38 +544,41 @@ class GameEngine {
       }
     });
 
+    const youState = this.playersMap.get(playerId);
+    const currentP = this.playersMap.get(this.getCurrentPlayerId());
+
     return {
       phase: this.phase,
       currentTurnPlayerId: this.getCurrentPlayerId(),
-      currentTurnPlayerName: this.playersMap.get(this.getCurrentPlayerId()).name,
+      currentTurnPlayerName: currentP ? currentP.name : 'Unknown',
       cardsPlayedThisTurn: this.cardsPlayedThisTurn,
       maxCardsPerTurn: 3,
       turnTimeRemaining: this.getTurnTimeRemaining(),
-      you: {
+      you: youState ? {
         id: youState.id,
         name: youState.name,
         hand: youState.hand,
         bank: youState.bank,
         properties: youState.properties,
         completeSets: this.getCompleteSets(youState.id)
-      },
+      } : null,
       opponents,
       drawPileCount: this.deck.length,
       discardPileTop: this.discardPile.length > 0 ? this.discardPile[this.discardPile.length - 1] : null,
       actionLog: this.actionLog,
       pendingAction: this.pendingAction ? {
         type: this.pendingAction.type,
-        fromPlayerName: this.playersMap.get(this.pendingAction.fromId).name,
+        fromPlayerName: this.playersMap.get(this.pendingAction.fromId)?.name || 'Someone',
         toPlayerId: this.pendingAction.toId,
         card: this.pendingAction.card,
         options: this.pendingAction.options
       } : null,
       pendingPayment: this.pendingPayment ? {
         amount: this.pendingPayment.amount,
-        toPlayerName: this.playersMap.get(this.pendingPayment.fromId).name,
+        toPlayerName: this.playersMap.get(this.pendingPayment.fromId)?.name || 'Someone',
         owedBy: this.pendingPayment.owedBy
       } : null,
-      discardCount: this.phase === 'DISCARD' && this.getCurrentPlayerId() === playerId ? youState.hand.length - 7 : null,
+      discardCount: this.phase === 'DISCARD' && this.getCurrentPlayerId() === playerId ? youState?.hand.length - 7 : null,
       winner: this.winner
     };
   }
