@@ -6,7 +6,9 @@ window.Network = {
   init() {
     // Assuming socket.io is included via script tag
     if (typeof io !== 'undefined') {
-      this.socket = io();
+      this.socket = io({
+        transports: ['websocket', 'polling']
+      });
       this.setupListeners();
     } else {
       console.error('Socket.io not found.');
