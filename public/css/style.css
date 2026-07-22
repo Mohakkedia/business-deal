@@ -1175,16 +1175,16 @@ input[type="text"]:focus {
     width: 100%;
 }
 
-/* Bottom: Hand Zone */
+/* Bottom: Hand Zone & Player Panels */
 #player-area {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     position: relative;
     width: 100%;
-    max-height: 230px;
+    min-height: 280px;
     margin-top: auto;
-    overflow: hidden !important;
+    overflow: visible !important;
 }
 
 .player-layout {
@@ -1193,8 +1193,9 @@ input[type="text"]:focus {
     align-items: flex-end;
     width: 100%;
     padding: 0 1rem;
-    height: 190px;
+    min-height: 275px;
     gap: 1.2rem;
+    overflow: visible !important;
 }
 
 .hand-zone {
