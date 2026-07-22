@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Deal</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cards.css">
+    
+    <!-- Socket.io Client -->
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <!-- Ambient Background Globs -->
+    <div class="bg-glow-container">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+    </div>
+
+    <!-- Title Screen -->
+    <div id="title-screen" class="screen">
+        <div class="title-container">
+            <h1 class="game-title">BUSINESS DEAL</h1>
+            <p class="game-subtitle">The Ultimate Property Trading Card Game</p>
+            
+            <div class="input-group">
+                <input type="text" id="player-name-input" placeholder="Enter your name" autocomplete="off" />
+                <button id="btn-create-game" class="btn btn-primary btn-large glow">Create Game</button>
+            </div>
+            
+            <div class="divider">
+                <span>OR</span>
+            </div>
+            
+            <div class="input-group">
+                <input type="text" id="join-code-input" placeholder="Enter Room Code" maxlength="4" autocomplete="off" style="text-transform: uppercase;" />
+                <button id="btn-join-game" class="btn btn-secondary">Join Game</button>
+            </div>
+        </div>
+        <div class="footer">
+            <a href="#" id="btn-show-rules">How to Play</a>
+        </div>
+    </div>
+
+    <!-- Lobby Screen -->
+    <div id="lobby-screen" class="screen hidden">
+        <div class="glass-panel centered-panel">
+            <h2>Game Lobby</h2>
+            <div class="room-info">
+                <p>Room Code</p>
+                <div class="code-display">
+                    <span id="room-code-display">----</span>
+                    <button id="btn-copy-link" class="icon-btn" title="Copy Link">📋</button>
+                </div>
+                <p id="shareable-link" class="small-text">Waiting for link...</p>
+            </div>
+            
+            <div class="players-container">
+                <h3>Players <span id="player-count">1/4</span></h3>
+                <ul id="player-list">
+                    <!-- Player items will be added here -->
+                </ul>
+            </div>
+            
+            <div class="lobby-actions">
+                <button id="btn-add-bot" class="btn btn-secondary">Add Bot</button>
+                <button id="btn-start-game" class="btn btn-primary btn-large glow" disabled>Start Game</button>
+                <button id="btn-leave-room" class="btn btn-danger">Leave</button>
+            </div>
+            <div class="waiting-indicator">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen hidden">
+        <!-- Top: Opponents Area -->
+        <div id="opponents-area">
+            <!-- Opponent panels generated dynamically -->
+        </div>
+
+        <!-- Floating Right Area: Turn Info & Card Decks -->
+        <div id="right-decks-area" class="right-decks-corner">
+            <div class="turn-info">
+                <div id="turn-indicator" class="glass-pill">
+                    <span class="current-player-name">Waiting...</span>
+                    <span class="phase-text"></span>
+                </div>
+                <div id="cards-played-counter" class="glass-pill small">Cards Played: 0/3</div>
+            </div>
+
+            <div class="decks-row">
+                <div id="draw-pile" class="pile">
+                    <div class="card card-back"></div>
+                    <span class="pile-count badge">--</span>
+                </div>
+                <div id="discard-pile" class="pile">
+                    <!-- Top discard card goes here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating In-Game Chat Box (Top Left Corner) -->
+        <div id="game-chat-box" class="glass-panel chat-corner">
+            <div class="chat-header" id="chat-header">
+                <span class="chat-title">💬 Game Chat <span id="chat-unread-badge" class="badge-unread hidden">0</span></span>
+                <button type="button" id="btn-toggle-chat" class="btn-chat-toggle" title="Close Chat">✖</button>
+            </div>
+            <div id="chat-body" class="chat-body">
+                <div id="chat-messages" class="chat-messages-list">
+                    <div class="chat-msg system">Welcome! Chat with other players here.</div>
+                </div>
+                <form id="chat-form" class="chat-input-row">
+                    <input type="text" id="chat-input" placeholder="Type a message..." maxlength="120" autocomplete="off" />
+                    <button type="submit" id="btn-send-chat" class="btn-chat-send">Send</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Bottom: Player Area -->
+        <div id="player-area">
+            <div class="player-layout">
+                <!-- Left: Properties -->
+                <div id="player-properties" class="properties-zone">
+                    <!-- Property sets go here -->
+                </div>
+                
+                <!-- Middle: Hand -->
+                <div class="hand-zone">
+                    <div id="player-hand" class="card-fan">
+                        <!-- Cards in hand go here -->
+                    </div>
+                </div>
+                
+                <!-- Right: Bank & Controls -->
+                <div class="bank-and-controls">
+                    <div id="player-bank" class="bank-zone">
+                        <div class="bank-total">Total: $<span>0</span>M</div>
+                        <div class="bank-stack">
+                            <!-- Money/Action cards as money go here -->
+                        </div>
+                    </div>
+                    <div class="player-controls">
+                        <button id="btn-draw-cards" class="btn btn-primary glow">Draw Cards</button>
+                        <button id="btn-end-turn" class="btn btn-secondary">End Turn</button>
+                    </div>
+                </div>
+            </div>
+            <div class="player-stats-bar glass-panel">
+                <span class="player-name-display">You</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rules Screen -->
+    <div id="rules-screen" class="screen hidden">
+        <div class="glass-panel large-panel scrollable">
+            <h2>How to Play Business Deal</h2>
+            <div class="rules-content">
+                <h3>Objective</h3>
+                <p>Be the first player to collect 3 complete property sets of different colors.</p>
+                
+                <h3>On Your Turn</h3>
+                <ol>
+                    <li>Draw 2 cards (5 if you start with an empty hand).</li>
+                    <li>Play up to 3 cards from your hand:</li>
+                    <ul>
+                        <li>Put money/action cards in your Bank.</li>
+                        <li>Put property cards in your Property collection.</li>
+                        <li>Play action cards into the center.</li>
+                    </ul>
+                    <li>At the end of your turn, discard if you have more than 7 cards.</li>
+                </ol>
+            </div>
+            <button id="btn-close-rules" class="btn btn-primary">Got it!</button>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-overlay" class="hidden">
+        
+        <!-- Card Action Modal -->
+        <div id="modal-card-action" class="modal glass-panel hidden">
+            <h3>Play Card</h3>
+            <div class="modal-card-preview"></div>
+            <div class="modal-actions">
+                <button id="btn-play-as-property" class="btn btn-primary hidden">Play as Property</button>
+                <button id="btn-play-as-bank" class="btn btn-secondary hidden">Play as Bank</button>
+                <button id="btn-play-as-action" class="btn btn-danger hidden">Play as Action</button>
+                <button class="btn btn-cancel">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Target Select Modal -->
+        <div id="modal-target-select" class="modal glass-panel hidden">
+            <h3>Select Target</h3>
+            <div id="target-options" class="options-list">
+                <!-- Buttons for opponents -->
+            </div>
+            <button class="btn btn-cancel mt-1">Cancel</button>
+        </div>
+
+        <!-- Color Select Modal -->
+        <div id="modal-color-select" class="modal glass-panel hidden">
+            <h3>Select Property Color</h3>
+            <div id="color-options" class="color-grid">
+                <!-- Color swatches -->
+            </div>
+            <button class="btn btn-cancel mt-1">Cancel</button>
+        </div>
+
+        <!-- Payment Modal -->
+        <div id="modal-payment" class="modal glass-panel large hidden">
+            <h3>You Owe <span class="debt-amount">$0M</span></h3>
+            <p>Select cards from your Bank and Properties to pay.</p>
+            <div class="payment-selection-area">
+                <!-- Selectable cards -->
+            </div>
+            <div class="payment-summary">
+                <p>Selected: <span class="selected-amount">$0M</span></p>
+                <button id="btn-confirm-payment" class="btn btn-primary glow" disabled>Pay</button>
+            </div>
+        </div>
+
+        <!-- Action Response Modal -->
+        <div id="modal-action-response" class="modal glass-panel hidden">
+            <h3 class="action-message">Player played X against you!</h3>
+            <div class="timer-bar"><div class="timer-fill"></div></div>
+            <div class="modal-actions">
+                <button id="btn-accept-action" class="btn btn-secondary">Accept</button>
+                <button id="btn-counter-action" class="btn btn-primary glow">Just Say No!</button>
+            </div>
+        </div>
+
+        <!-- Discard Modal -->
+        <div id="modal-discard" class="modal glass-panel large hidden">
+            <h3>Discard Cards</h3>
+            <p>You must discard <span class="discard-count">0</span> cards.</p>
+            <div id="discard-selection-area" class="card-grid">
+                <!-- Hand cards -->
+            </div>
+            <button id="btn-confirm-discard" class="btn btn-primary glow mt-1" disabled>Confirm Discard</button>
+        </div>
+
+        <!-- Card Detail Modal -->
+        <div id="modal-card-detail" class="modal glass-panel hidden">
+            <div class="enlarged-card-container">
+                <!-- Full sized card -->
+            </div>
+            <button class="btn btn-cancel mt-1">Close</button>
+        </div>
+
+        <!-- Game Over Modal -->
+        <div id="modal-game-over" class="modal glass-panel hidden">
+            <h2 class="winner-announcement">Player Wins!</h2>
+            <div class="confetti-container"></div>
+            <button id="btn-play-again" class="btn btn-primary glow large mt-1">Play Again</button>
+        </div>
+
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification-container"></div>
+
+    <!-- Scripts -->
+    <script src="js/cardRenderer.js" defer></script>
+    <script src="js/animations.js" defer></script>
+    <script src="js/network.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,674 @@
+/* ==========================================
+   Business Deal - Sleek Cyber Card Designs
+   ========================================== */
+
+/* Card Base */
+.card {
+    position: relative;
+    width: 105px;
+    height: 155px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: rgba(15, 17, 36, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+    box-shadow: 
+        0 8px 24px -8px rgba(0, 0, 0, 0.6),
+        0 0 1px 1px rgba(255, 255, 255, 0.05) inset;
+    cursor: pointer;
+    transition: 
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.3s ease;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+/* Card Image thumbnail */
+.card-image {
+    width: 100%;
+    height: 48px;
+    background-size: cover;
+    background-position: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    flex-shrink: 0;
+}
+
+/* Card interactions in hand */
+.card-fan {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 12px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.card-fan .card {
+    position: relative;
+    bottom: auto;
+    transform-origin: bottom center;
+}
+
+.card-fan .card:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 20px 35px -10px rgba(0, 0, 0, 0.8),
+        0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.card.selected {
+    border-color: var(--color-cyber-blue) !important;
+    box-shadow: 
+        0 0 25px var(--color-cyber-blue-glow),
+        0 20px 40px rgba(0,0,0,0.8) !important;
+    transform: translateY(-35px) scale(1.12) !important;
+    z-index: 80 !important;
+}
+
+.card.disabled {
+    filter: grayscale(1) opacity(0.25);
+    pointer-events: none;
+}
+
+.card.playable {
+    border-color: var(--color-emerald) !important;
+    box-shadow: 
+        0 0 15px var(--color-emerald-glow),
+        0 8px 24px -8px rgba(0, 0, 0, 0.6);
+}
+
+/* Mini Cards for Opponents/Bank/Properties */
+.card-mini {
+    width: 70px;
+    height: 100px;
+    font-size: 0.75rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.card-mini .card-image {
+    height: 30px;
+}
+.card-mini .card-value {
+    width: 18px;
+    height: 18px;
+    font-size: 0.6rem;
+    top: 3px;
+    right: 3px;
+}
+.card-mini .card-header {
+    font-size: 0.5rem;
+    padding: 2px;
+}
+.card-mini .card-title {
+    font-size: 0.65rem;
+    padding: 0 4px;
+}
+.card-mini .card-body {
+    padding: 2px 4px;
+}
+.card-mini .card-rent-table, .card-mini .rents {
+    display: none !important; /* Hide details on mini cards */
+}
+
+/* Circular Golden DEAL Logo Emblem (From Screenshot 2026-07-21 232526.png) */
+.card-deal-logo-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid #ffd700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 4px auto;
+    background: rgba(5, 6, 18, 0.75);
+    box-shadow: 
+        0 0 12px rgba(255, 215, 0, 0.35),
+        inset 0 0 8px rgba(255, 215, 0, 0.2);
+    flex-shrink: 0;
+}
+
+.deal-circle-text {
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
+    font-weight: 900;
+    color: #ffd700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
+}
+
+/* Card Back Styling */
+.card-back {
+    background: radial-gradient(circle at center, #11152c 0%, #060814 100%) !important;
+    border: 2.5px solid #ffd700 !important;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card-back .card-deal-logo-circle {
+    width: 52px;
+    height: 52px;
+    border-width: 2.5px;
+}
+.card-back .deal-circle-text {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+}
+
+/* Mini Cards */
+.card-mini .card-deal-logo-circle {
+    width: 28px;
+    height: 28px;
+    border-width: 1.5px;
+    margin: 2px auto;
+}
+.card-mini .deal-circle-text {
+    font-size: 0.52rem;
+    letter-spacing: 1px;
+}
+
+/* Modal Preview Card */
+.modal .card .card-deal-logo-circle {
+    width: 60px;
+    height: 60px;
+    border-width: 3px;
+    margin: 8px auto;
+}
+.modal .card .deal-circle-text {
+    font-size: 1.1rem;
+    letter-spacing: 2.5px;
+}
+
+/* Clean Property Card Layout (Matching WhatsApp Image 2026-07-22 at 12.29.41 AM.jpeg) */
+.card-property-clean {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card-value-circle {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #000000;
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    font-weight: 900;
+    border: 1.5px solid #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.card-header-plain {
+    height: 38px;
+    width: 100%;
+    flex-shrink: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.card-body-clean {
+    flex: 1;
+    background: #ffffff;
+    color: #000000;
+    padding: 6px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.rent-title-clean {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: #000000;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+    margin-left: auto;
+    text-align: right;
+    width: 100%;
+}
+
+.rent-rows-clean {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.rent-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #1e293b;
+    white-space: nowrap;
+}
+
+.rent-set-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 13px;
+    height: 13px;
+    border: 1px solid #000;
+    border-radius: 2px;
+    font-size: 0.58rem;
+    font-weight: 900;
+    background: #f8fafc;
+}
+
+.rent-dots {
+    flex: 1;
+    overflow: hidden;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 0.55rem;
+    letter-spacing: -1px;
+}
+
+.rent-val {
+    font-weight: 800;
+    color: #000000;
+}
+.rent-val.full-set {
+    font-weight: 900;
+    color: #d97706;
+}
+
+.active-wild-pill {
+    font-size: 0.58rem;
+    font-weight: 900;
+    color: #ffffff;
+    padding: 1px 6px;
+    border-radius: 6px;
+    margin-bottom: 3px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    border: 1px solid rgba(0,0,0,0.3);
+}
+
+/* Mini property cards override */
+.card-mini.card-property-clean .card-header-plain {
+    height: 24px;
+}
+.card-mini.card-property-clean .card-value-circle {
+    width: 16px;
+    height: 16px;
+    font-size: 0.5rem;
+    border-width: 1px;
+    top: 2px;
+    left: 2px;
+}
+.card-mini.card-property-clean .card-body-clean {
+    padding: 2px;
+}
+.card-mini.card-property-clean .rent-rows-clean {
+    display: none;
+}
+
+/* Clean Rent Card Layout (Matching WhatsApp Image 2026-07-22 at 12.29.44 AM.jpeg) */
+.card-rent-clean {
+    background: #d4dbb1 !important;
+    color: #000000 !important;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding: 6px;
+    border: 1.5px solid #000000;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.rent-action-header-text {
+    font-family: var(--font-heading);
+    font-size: 0.62rem;
+    font-weight: 900;
+    color: #000000;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+    margin-left: 20px;
+    text-transform: uppercase;
+}
+
+.rent-emblem-outer {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 4px 0;
+}
+
+.rent-emblem-ring {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.rent-emblem-inner {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rent-emblem-text {
+    font-family: var(--font-heading);
+    font-size: 0.68rem;
+    font-weight: 900;
+    color: #000000;
+    letter-spacing: 1px;
+}
+
+.rent-desc-text {
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: #1e293b;
+    text-align: center;
+    line-height: 1.2;
+    padding: 0 2px 2px 2px;
+}
+
+/* Mini rent card override */
+.card-mini.card-rent-clean {
+    padding: 2px;
+}
+.card-mini.card-rent-clean .rent-action-header-text,
+.card-mini.card-rent-clean .rent-desc-text {
+    display: none;
+}
+.card-mini.card-rent-clean .rent-emblem-ring {
+    width: 32px;
+    height: 32px;
+    border-width: 1px;
+}
+.card-mini.card-rent-clean .rent-emblem-inner {
+    width: 20px;
+    height: 20px;
+    border-width: 1px;
+}
+.card-mini.card-rent-clean .rent-emblem-text {
+    font-size: 0.45rem;
+}
+.card-header {
+    background: rgba(0, 0, 0, 0.45);
+    padding: 4px;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 1.5px;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.card-title {
+    flex-grow: 0;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.card-value {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: #fff;
+    color: #0c0d19;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 0.7rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    border: 1.5px solid rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+.card-body {
+    padding: 6px;
+    font-size: 0.65rem;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.card-footer {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2px;
+    font-size: 0.5rem;
+    text-align: center;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Rent Table Styling */
+.rents {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-size: 0.6rem;
+    width: 100%;
+}
+.rents div {
+    display: flex;
+    justify-content: space-between;
+    padding: 1px 4px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.02);
+}
+.rents div:nth-child(even) {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* --- Card Types Specific Designs --- */
+
+/* Money Card */
+.card-money {
+    background: linear-gradient(135deg, hsl(45, 80%, 25%) 0%, hsl(45, 100%, 15%) 100%);
+    border-color: var(--color-gold-glow);
+}
+.card-money:hover {
+    border-color: var(--color-gold);
+    box-shadow: 0 0 15px var(--color-gold-glow);
+}
+.card-money .card-header {
+    background: rgba(255, 215, 0, 0.1);
+    color: var(--color-gold);
+}
+.card-money .card-title {
+    background: transparent;
+    color: white;
+}
+.card-money .money-large {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--color-gold);
+    text-shadow: 0 0 15px var(--color-gold-glow);
+    text-align: center;
+}
+.card-money .card-value { display: none; } /* Big number is value */
+
+/* Action Card */
+.card-action {
+    background: linear-gradient(135deg, hsl(230, 20%, 15%) 0%, hsl(230, 25%, 8%) 100%);
+    border: 2.5px solid #ffffff !important;
+}
+.card-action:hover {
+    border-color: #ffffff !important;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8) !important;
+}
+.card-action .card-header {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-weight: 900 !important;
+}
+.card-action .card-title {
+    color: white;
+}
+.card-action .action-desc {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+/* Rent Card */
+.card-rent {
+    background: linear-gradient(135deg, hsl(195, 80%, 12%) 0%, hsl(195, 100%, 6%) 100%);
+    border-color: var(--color-cyber-blue-glow);
+}
+.card-rent:hover {
+    border-color: var(--color-cyber-blue);
+    box-shadow: 0 0 15px var(--color-cyber-blue-glow);
+}
+.card-rent .card-header {
+    background: rgba(0, 180, 216, 0.1);
+    color: var(--color-cyber-blue);
+}
+.card-rent .rent-desc {
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.3;
+}
+
+/* Property Set Styling - High Contrast & Distinct Color Borders */
+.card-brown { border: 2.5px solid #795548 !important; background: linear-gradient(135deg, #3e2723 0%, #1c0d0a 100%); }
+.card-lightBlue { border: 2.5px solid #00BCD4 !important; background: linear-gradient(135deg, #004d40 0%, #001a24 100%); }
+.card-pink { border: 2.5px solid #E91E63 !important; background: linear-gradient(135deg, #4a001f 0%, #1a000a 100%); }
+.card-orange { border: 2.5px solid #FF9800 !important; background: linear-gradient(135deg, #4a2800 0%, #1c0f00 100%); }
+.card-red { border: 2.5px solid #F44336 !important; background: linear-gradient(135deg, #4a0d0d 0%, #1c0303 100%); }
+.card-yellow { border: 2.5px solid #FFD700 !important; background: linear-gradient(135deg, #4a3e00 0%, #1c1700 100%); }
+.card-green { border: 2.5px solid #4CAF50 !important; background: linear-gradient(135deg, #0f3813 0%, #031406 100%); }
+.card-darkBlue { border: 2.5px solid #29b6f6 !important; background: linear-gradient(135deg, #0d1b40 0%, #030818 100%); }
+.card-railroad { border: 2.5px solid #D946EF !important; background: linear-gradient(135deg, #4a004d 0%, #1a001c 100%); }
+.card-utility { border: 2.5px solid #26A69A !important; background: linear-gradient(135deg, #00363a 0%, #001517 100%); }
+
+.card-brown:hover { box-shadow: 0 0 15px rgba(121, 85, 72, 0.6) !important; }
+.card-lightBlue:hover { box-shadow: 0 0 15px rgba(0, 188, 212, 0.6) !important; }
+.card-pink:hover { box-shadow: 0 0 15px rgba(233, 30, 99, 0.6) !important; }
+.card-orange:hover { box-shadow: 0 0 15px rgba(255, 152, 0, 0.6) !important; }
+.card-red:hover { box-shadow: 0 0 15px rgba(244, 67, 54, 0.6) !important; }
+.card-yellow:hover { box-shadow: 0 0 15px rgba(255, 215, 0, 0.6) !important; }
+.card-green:hover { box-shadow: 0 0 15px rgba(76, 175, 80, 0.6) !important; }
+.card-darkBlue:hover { box-shadow: 0 0 15px rgba(41, 182, 246, 0.6) !important; }
+.card-railroad:hover { box-shadow: 0 0 15px rgba(217, 70, 239, 0.7) !important; }
+
+/* Wild & Rainbow Cards */
+.card-wild.rainbow {
+    background: linear-gradient(135deg, #0d0d1e 0%, #05050f 100%);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+.card-wild.rainbow::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(45deg, #ff0055, #00ffcc, #ffcc00, #ff0055);
+    z-index: -1;
+    margin: -2px;
+    border-radius: 12px;
+    animation: rainbowBorder 3s linear infinite;
+    background-size: 300% 300%;
+}
+
+/* Card Back Design */
+.card-back {
+    background: linear-gradient(135deg, #0d0e1b 0%, #1b1936 50%, #05060f 100%);
+    border: 2px solid var(--color-gold);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 10px 25px rgba(0,0,0,0.6),
+        0 0 15px var(--color-gold-glow);
+}
+.card-back::after {
+    display: none; /* Hide old text content */
+}
+.card-back .card-logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--color-gold);
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+    letter-spacing: 2px;
+    border: 2px solid var(--color-gold);
+    padding: 10px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.4);
+    box-shadow: inset 0 0 10px var(--color-gold-glow);
+}
+
+/* Set Completion Glow */
+.complete-set-glow {
+    box-shadow: 0 0 20px 5px var(--color-gold-glow) !important;
+    border-color: var(--color-gold) !important;
+}
+
+/* Keyframes */
+@keyframes rainbowBorder {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Selected cards in modals should not translate */
+.payment-cards .card.selected, .discard-cards .card.selected {
+    transform: none !important;
+    border-color: var(--color-cyber-blue) !important;
+    box-shadow: 0 0 15px var(--color-cyber-blue-glow) !important;
+}
