@@ -172,7 +172,7 @@ window.UI = {
   },
 
   renderBank(bank) {
-    const totalEl = document.querySelector('#player-bank .bank-total span');
+    const totalEl = document.getElementById('player-bank-total') || document.querySelector('#player-bank .bank-total .total-amount span');
     const stack = document.querySelector('#player-bank .bank-stack');
     
     let total = 0;
@@ -181,8 +181,8 @@ window.UI = {
       bank.forEach((card, idx) => {
         total += card.value;
         const cardEl = window.CardRenderer.createCard(card, { mini: true });
-        cardEl.style.position = 'absolute';
-        cardEl.style.top = `${idx * 15}px`;
+        cardEl.style.position = 'relative';
+        cardEl.style.top = '0';
         stack.appendChild(cardEl);
       });
     }
