@@ -1390,53 +1390,163 @@ input[type="text"]:focus {
 }
 
 /* ==========================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN (MOBILE & TABLETS)
    ========================================== */
 @media (max-width: 1024px) {
-    #game-screen {
-        grid-template-areas:
-            "opponents"
-            "center"
-            "hand";
-        grid-template-rows: auto 1fr auto;
-        grid-template-columns: 1fr;
-        overflow-y: auto;
-        height: auto;
-        min-height: 100vh;
-    }
     .player-layout {
         flex-direction: column;
         align-items: center;
         height: auto;
-        gap: 1.5rem;
-    }
-    #player-properties {
-        width: 100%;
-        height: 180px;
-    }
-    .bank-and-controls {
-        width: 100%;
-        height: 180px;
-    }
-    .hand-zone {
-        width: 100%;
-        height: 150px;
+        gap: 1rem;
     }
 }
 
 @media (max-width: 768px) {
-    .centered-panel {
-        padding: 2rem;
+    #game-screen:not(.hidden) {
+        padding: 0.4rem !important;
+        height: 100vh !important;
+        overflow-y: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        gap: 0.4rem !important;
     }
+
+    .title-container {
+        width: 92% !important;
+        padding: 1.2rem !important;
+    }
+
     .game-title {
-        font-size: 3.5rem;
+        font-size: 2.2rem !important;
     }
-    .table-center {
-        gap: 1.5rem;
-        flex-direction: column;
+
+    /* Opponents Area: Horizontal Scroll Bar */
+    #opponents-area {
+        min-height: 85px !important;
+        height: auto !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        justify-content: flex-start !important;
+        padding-bottom: 4px !important;
+        gap: 0.6rem !important;
     }
-    .pile {
-        width: 80px;
-        height: 120px;
+
+    .opponent-panel {
+        min-width: 130px !important;
+        max-width: 150px !important;
+        padding: 6px !important;
+        flex: 0 0 auto !important;
+    }
+
+    /* Decks & Turn Info Bar for Mobile */
+    .right-decks-corner {
+        position: relative !important;
+        right: auto !important;
+        top: auto !important;
+        transform: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 0.3rem !important;
+        margin: 0.2rem 0 !important;
+        box-sizing: border-box !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .turn-info {
+        flex-direction: row !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        width: 100% !important;
+        margin-bottom: 4px !important;
+    }
+
+    /* Floating Chat Box on Mobile (Collapsed by default) */
+    #game-chat-box {
+        position: fixed !important;
+        top: 10px !important;
+        left: 10px !important;
+        width: 44px !important;
+        height: 44px !important;
+        overflow: hidden !important;
+        border-radius: 50% !important;
+        z-index: 1000 !important;
+        transition: all 0.3s ease !important;
+    }
+
+    #game-chat-box.collapsed {
+        width: 44px !important;
+        height: 44px !important;
+    }
+
+    #game-chat-box:not(.collapsed) {
+        width: calc(100vw - 20px) !important;
+        max-width: 320px !important;
+        height: 240px !important;
+        border-radius: 12px !important;
+    }
+
+    /* Card Scaling for Mobile */
+    .card {
+        width: 80px !important;
+        height: 112px !important;
+    }
+
+    .card-mini {
+        width: 44px !important;
+        height: 62px !important;
+    }
+
+    /* Hand Zone for Mobile */
+    .hand-zone {
+        padding: 0.4rem !important;
+        min-height: 120px !important;
+        height: auto !important;
+    }
+
+    #player-hand {
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        justify-content: flex-start !important;
+        padding-bottom: 6px !important;
+    }
+
+    #player-hand .card {
+        margin-left: -22px !important;
+        flex: 0 0 auto !important;
+    }
+
+    #player-hand .card:first-child {
+        margin-left: 0 !important;
+    }
+
+    /* Property Columns for Mobile */
+    #player-properties {
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        justify-content: flex-start !important;
+        padding-bottom: 6px !important;
+    }
+
+    .property-column {
+        width: 85px !important;
+        min-width: 85px !important;
+        flex: 0 0 85px !important;
+    }
+
+    .bank-and-controls {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    #btn-end-turn {
+        width: 100% !important;
+        padding: 0.7rem !important;
+        font-size: 0.95rem !important;
     }
 }
