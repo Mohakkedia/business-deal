@@ -8,7 +8,7 @@
  */
 
 window.BG3DEngine = (function () {
-  let activeMode = 1;
+  let activeMode = 3;
 
   const canvas = document.createElement('canvas');
   canvas.id = 'bg-3d-canvas';
