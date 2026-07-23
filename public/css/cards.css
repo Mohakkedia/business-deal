@@ -219,11 +219,12 @@
 
 .card-header {
     font-family: var(--font-heading);
-    font-size: 0.52rem;
+    font-size: 0.54rem;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.3px;
-    padding: 4px 26px 4px 5px;
+    padding: 5px 28px 4px 6px;
+    line-height: 1.25;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

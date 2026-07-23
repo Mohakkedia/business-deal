@@ -53,7 +53,7 @@ window.CardRenderer = {
       if (options.mini) {
         el.classList.add('card-mini');
       }
-      el.innerHTML = '<div class="card-logo">DEAL</div>';
+      el.innerHTML = '<div class="card-deal-logo-circle"><span class="deal-circle-text">CHALOO</span></div>';
       if (options.onClick) {
         el.addEventListener('click', () => options.onClick(card));
       }
@@ -218,7 +218,7 @@ window.CardRenderer = {
     if (options.mini) {
       el.classList.add('card-mini');
     }
-    el.innerHTML = '<div class="card-deal-logo-circle"><span class="deal-circle-text">DEAL</span></div>';
+    el.innerHTML = '<div class="card-deal-logo-circle"><span class="deal-circle-text">CHALOO</span></div>';
     return el;
   },
 
