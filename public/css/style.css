@@ -1614,3 +1614,64 @@ input[type="text"]:focus {
         font-size: 0.85rem !important;
     }
 }
+
+/* 3D Background Theme Switcher Pill */
+.bg-theme-switcher {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    background: rgba(8, 10, 24, 0.45);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 25px;
+    z-index: 30;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.switcher-label {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--color-gold);
+    text-transform: uppercase;
+}
+
+.switcher-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn-theme {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.85);
+    font-family: var(--font-heading);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.35rem 0.8rem;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.btn-theme:hover {
+    background: rgba(0, 243, 255, 0.2);
+    border-color: var(--color-cyber-blue);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px var(--color-cyber-blue-glow);
+}
+
+.btn-theme.active {
+    background: linear-gradient(90deg, #00f3ff, #00b4d8);
+    border-color: #00f3ff;
+    color: #000;
+    font-weight: 900;
+    box-shadow: 0 0 12px rgba(0, 243, 255, 0.6);
+}

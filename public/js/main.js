@@ -27,6 +27,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const nameInput = document.getElementById('player-name-input');
     if (nameInput) nameInput.value = savedName;
   }
+
+  // 3D Background Theme Switcher Event Listeners
+  const themeBtns = document.querySelectorAll('.btn-theme');
+  themeBtns.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      themeBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      const mode = btn.dataset.mode;
+      if (window.BG3DEngine) {
+        window.BG3DEngine.setMode(mode);
+      }
+    });
+  });
   
   // Button event listeners
   // Create Game
