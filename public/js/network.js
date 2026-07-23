@@ -52,7 +52,7 @@ window.Network = {
     });
 
     this.socket.on('turn-timer-tick', (data) => {
-      if (window.UI) window.UI.updateTurnTimer(data.timeRemaining);
+      if (window.UI) window.UI.updateTurnTimer(data.timeRemaining, data.isPaused, data.pausedReason);
     });
 
     this.socket.on('game-over', (data) => {

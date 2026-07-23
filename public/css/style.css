@@ -752,6 +752,13 @@ input[type="text"]:focus {
     box-shadow: 0 0 12px rgba(239, 68, 68, 0.8);
 }
 
+.turn-timer-badge.paused {
+    background: rgba(234, 179, 8, 0.3) !important;
+    color: #facc15 !important;
+    border-color: #eab308 !important;
+    box-shadow: 0 0 10px rgba(234, 179, 8, 0.5);
+}
+
 @keyframes pulseTimer {
     0% { transform: scale(1); }
     100% { transform: scale(1.1); }

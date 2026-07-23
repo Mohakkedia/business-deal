@@ -28,10 +28,17 @@ function initializeSocketHandlers(io, roomManager) {
   setInterval(() => {
     roomManager.rooms.forEach(room => {
       if (room.gameStarted && room.game && !room.game.winner) {
+        const isPaused = Boolean(room.game.isTimerPaused || room.game.phase === 'PAYMENT' || room.game.phase === 'ACTION_RESPONSE' || room.game.pendingPayment || room.game.pendingAction);
         const remaining = room.game.getTurnTimeRemaining();
-        io.to(room.code).emit('turn-timer-tick', { timeRemaining: remaining });
+        const pausedReason = isPaused ? (room.game.phase === 'PAYMENT' || room.game.pendingPayment ? 'Paying Rent' : 'Action Pending') : null;
 
-        if (remaining <= 0) {
+        io.to(room.code).emit('turn-timer-tick', { 
+          timeRemaining: remaining,
+          isPaused: isPaused,
+          pausedReason: pausedReason
+        });
+
+        if (!isPaused && remaining <= 0) {
           console.log(`Turn 20s timeout in room ${room.code} for player ${room.game.getCurrentPlayerId()}`);
           try {
             room.game.forceTimeoutTurn();

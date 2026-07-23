@@ -28,19 +28,46 @@ class GameEngine {
     this.actionLog = [];
     this.turnDuration = 20;
     this.turnStartTime = Date.now();
+    this.isTimerPaused = false;
+    this.pausedTimeRemaining = null;
   }
 
   resetTurnTimer() {
     this.turnStartTime = Date.now();
+    this.isTimerPaused = false;
+    this.pausedTimeRemaining = null;
+  }
+
+  pauseTurnTimer() {
+    if (!this.isTimerPaused) {
+      this.pausedTimeRemaining = this.getTurnTimeRemaining();
+      this.isTimerPaused = true;
+    }
+  }
+
+  resumeTurnTimer() {
+    if (this.isTimerPaused) {
+      const remaining = (this.pausedTimeRemaining !== null && this.pausedTimeRemaining !== undefined) ? this.pausedTimeRemaining : this.turnDuration;
+      this.turnStartTime = Date.now() - ((this.turnDuration - remaining) * 1000);
+      this.isTimerPaused = false;
+      this.pausedTimeRemaining = null;
+    }
   }
 
   getTurnTimeRemaining() {
-    if (!this.turnStartTime) return 20;
+    if (this.isTimerPaused || this.phase === 'PAYMENT' || this.phase === 'ACTION_RESPONSE' || this.pendingPayment || this.pendingAction) {
+      return (this.pausedTimeRemaining !== null && this.pausedTimeRemaining !== undefined) ? this.pausedTimeRemaining : this.turnDuration;
+    }
+    if (!this.turnStartTime) return this.turnDuration;
     const elapsed = Math.floor((Date.now() - this.turnStartTime) / 1000);
     return Math.max(0, this.turnDuration - elapsed);
   }
 
   forceTimeoutTurn() {
+    if (this.phase === 'PAYMENT' || this.phase === 'ACTION_RESPONSE' || this.isTimerPaused || this.pendingPayment || this.pendingAction) {
+      return; // Do not auto-timeout turn while payment or action response is pending!
+    }
+
     const currentPlayerId = this.getCurrentPlayerId();
     const pState = this.playersMap.get(currentPlayerId);
     if (!pState) return;
@@ -302,6 +329,7 @@ class GameEngine {
   }
 
   _setupActionResponse(fromId, toId, card, options) {
+    this.pauseTurnTimer();
     this.phase = 'ACTION_RESPONSE';
     this.pendingAction = {
       type: card.actionType || 'rent',
@@ -314,6 +342,7 @@ class GameEngine {
   }
 
   _setupPayment(fromId, toId, amount, reason, card = null) {
+    this.pauseTurnTimer();
     this.phase = 'PAYMENT';
     this.pendingPayment = {
       fromId,
@@ -396,6 +425,7 @@ class GameEngine {
         }
       }
       this.phase = 'PLAY';
+      this.resumeTurnTimer();
       this.checkWinCondition(action.fromId);
     }
   }
@@ -454,6 +484,7 @@ class GameEngine {
     if (this.pendingPayment.owedBy.length === 0) {
       this.pendingPayment = null;
       this.phase = 'PLAY';
+      this.resumeTurnTimer();
     }
   }
 

@@ -129,14 +129,21 @@ window.UI = {
     }
   },
 
-  updateTurnTimer(timeRemaining) {
+  updateTurnTimer(timeRemaining, isPaused = false, pausedReason = null) {
     const badge = document.getElementById('turn-timer-badge');
     if (badge) {
-      badge.textContent = `⏳ ${timeRemaining}s`;
-      if (timeRemaining <= 5) {
-        badge.classList.add('urgent');
-      } else {
+      if (isPaused) {
+        badge.textContent = `⏸️ ${timeRemaining}s (${pausedReason || 'PAUSED'})`;
         badge.classList.remove('urgent');
+        badge.classList.add('paused');
+      } else {
+        badge.textContent = `⏳ ${timeRemaining}s`;
+        badge.classList.remove('paused');
+        if (timeRemaining <= 5) {
+          badge.classList.add('urgent');
+        } else {
+          badge.classList.remove('urgent');
+        }
       }
     }
   },
